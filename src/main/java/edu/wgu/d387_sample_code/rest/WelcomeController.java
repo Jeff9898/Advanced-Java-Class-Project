@@ -1,4 +1,4 @@
-package edu.wgu.d387_sample_code;
+package edu.wgu.d387_sample_code.rest;
 
 import edu.wgu.d387_sample_code.model.LocalizedWelcomeMessage;
 import org.springframework.core.io.ClassPathResource;

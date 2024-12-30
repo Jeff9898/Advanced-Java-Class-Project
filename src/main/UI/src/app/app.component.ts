@@ -27,6 +27,7 @@ export class AppComponent implements OnInit{
   request!:ReserveRoomRequest;
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
+  timeData: string = ''; // variable for storing time data
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
@@ -43,6 +44,23 @@ export class AppComponent implements OnInit{
     roomsearchValueChanges$.subscribe(x => {
       this.currentCheckInVal = x.checkin;
       this.currentCheckOutVal = x.checkout;
+    });
+    this.getTimeData(); // Fetch time data when component initializes
+  }
+
+  getTimeData(): void {
+    const timeUrl = 'http://localhost:8080/time/convert';
+
+    this.httpClient.get(timeUrl, { responseType: 'text' }).subscribe({
+      next: (data: string) => {
+        this.timeData = data;
+      },
+      error: (error) => {
+        console.error('Error fetching time data:', error);
+      },
+      complete: () => {
+        console.log('Time data fetch completed');
+      }
     });
   }
 

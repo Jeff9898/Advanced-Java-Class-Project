@@ -22,11 +22,10 @@
 <main id="wrapper">
   <div class="scene" id="welcome">
     <article class="content">
-
- 
-
       <div class="row">
         <div class=""col-12>
+          <h2>The Landon Hotel will be hosting a live online presentation on February 20th at </h2>
+            <div [innerHTML]="timeData"></div>
           <div class="gallery">
             <img src="assets/images/intro_room.jpg" alt="Intro Gallery Room Sample Pictures">
             <img src="assets/images/intro_pool.jpg" alt="Intro Gallery Pool Sample Pictures">
@@ -58,7 +57,7 @@
               </div>
               </form>
 
-        
+
         </div>
       </div>
 
@@ -75,7 +74,10 @@
                 </td>
                 <td>
                   <strong>Room #: {{room.roomNumber}}</strong><br/>
-                  <strong>Price: ${{room.price}}</strong>
+                  <strong>Price: ${{room.price}}</strong><br>
+                  <p>Price (USD): {{ room.price | currency:'USD' }}</p>
+                  <p>Price (CAD): {{ room.price | currency:'CAD' }}</p>
+                  <p>Price (EUR): {{ room.price | currency:'EUR' }}</p>
                 </td>
                 <td>
                   <button type="submit" class="btn btn-primary" (click)="reserveRoom(room.id)">Reserve</button>
