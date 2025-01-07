@@ -28,6 +28,8 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
   timeData: string = ''; // variable for storing time data
+  englishWelcomeMessage: string = '';
+  frenchWelcomeMessage: string = '';
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit{
       this.currentCheckOutVal = x.checkout;
     });
     this.getTimeData(); // Fetch time data when component initializes
+      this.getWelcomeMessages();
   }
 
   getTimeData(): void {
@@ -60,6 +63,34 @@ export class AppComponent implements OnInit{
       },
       complete: () => {
         console.log('Time data fetch completed');
+      }
+    });
+  }
+
+  getWelcomeMessages(): void {
+    // Fetch English welcome message
+    this.httpClient.get(`${this.baseURL}/welcome/en`, { responseType: 'text' }).subscribe({
+      next: (data: string) => {
+        this.englishWelcomeMessage = data;
+      },
+      error: (error) => {
+        console.error('Error fetching English welcome message:', error);
+      },
+      complete: () => {
+        console.log('English welcome message fetch completed');
+      }
+    });
+
+    // Fetch French welcome message
+    this.httpClient.get(`${this.baseURL}/welcome/fr`, { responseType: 'text' }).subscribe({
+      next: (data: string) => {
+        this.frenchWelcomeMessage = data;
+      },
+      error: (error) => {
+        console.error('Error fetching French welcome message:', error);
+      },
+      complete: () => {
+        console.log('French welcome message fetch completed');
       }
     });
   }
